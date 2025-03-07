@@ -61,7 +61,7 @@ print(f"Manually calculated r2_score with scaling : ", r2_score(output_test,pred
 print(f"Mean Sqrd Error with scaling : ", root_mean_squared_error(output_test,pred_output2))
 print(f"model params coeff with scaling: { model.coef_}, intercept: {model.intercept_}")
 # #
-poly = PolynomialFeatures(degree=2, include_bias=False)
+poly = PolynomialFeatures(degree=3, include_bias=False)
 input_train_poly = poly.fit_transform(input_train)
 input_test_poly = poly.transform(input_test)
 
