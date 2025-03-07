@@ -18,7 +18,7 @@ df = pd.read_csv("./Social_Network_Ads.csv")
 # print(df)
 inputx= df.iloc[:,0:2]
 inputy=df.iloc[:,2]
-# print(inputx,inputy)
+# print(inputx)
 
 # supervised learning
 # split the data into train and test
@@ -31,7 +31,7 @@ scaler = StandardScaler()
 #scale the inout train and test data sets
 input_scaled_train = scaler.fit_transform(input_train)
 input_scaled_test = scaler.transform(input_test)
-
+# print(input_scaled_train)
 # print(input_scaled_train, input_scaled_test)
 # create a classifier model
 classifier = KNeighborsClassifier(
@@ -47,4 +47,9 @@ pred_output= classifier.predict(input_scaled_test)
 
 print(confusion_matrix(output_test,pred_output))
 print(accuracy_score(output_test,pred_output))
+
+new_scaled_input = scaler.transform(np.array([[50,100000]]))
+# print(new_scaled_input)
+print(classifier.predict(new_scaled_input))
+
 
