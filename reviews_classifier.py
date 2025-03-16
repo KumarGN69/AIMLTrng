@@ -1,10 +1,66 @@
 import pandas as pd
+import time, re,csv
+from sentiment_analyzer import SentimentAnalyzer
 
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import KMeans
+from collections import Counter
+
+
+
+# ---------------read the csv file-------------------------------------------------
 df = pd.read_csv("./all_posts.csv")
-print(df.columns)
+
+# ---------------combine tile and review text into cpmbinedreview-------------------------------------------------
 df["combined_reviews"] = df['post_title'] + "." + df['self_text']
 print(df.columns)
-print(df['combined_reviews'][0])
-print(df['post_title'][0])
-print(df['self_text'][0])
+
+# ---------------analyze sentiments -------------------------------------------------
+start = time.time()
+print(f"Starting Sentiment analysis")
+posts = pd.read_csv('./all_posts.csv')
+sentiments = SentimentAnalyzer()
+sentiments.assessSentiments(reviews=posts)
+# print the sentiment analysis summary
+print(
+    f"Positive: {sentiments.positive_sentiments}, Negative:{sentiments.negative_sentiments}, "
+    f" Neutral: {sentiments.neutral_sentiments}, Unclassified: {sentiments.unclassified_sentiments}")
+end = time.time()
+print(f"time taken for sentiment analysis", end - start)
+
+# ---------------cluster using -------------------------------------------------
+
+df = pd.read_csv("./reddit_negative_reviews.csv")
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r'\W+', ' ', text)  # Remove punctuation
+    return text
+
+df['Cleaned_Review'] = df['user_review'].apply(clean_text)
+
+# Step 2: Convert to TF-IDF Features
+vectorizer = TfidfVectorizer(stop_words='english', max_features=5000)  # Adjust feature size for speed
+X = vectorizer.fit_transform(df['Cleaned_Review'])
+
+# Step 3: Apply K-Means Clustering
+num_clusters = 6  # Since you need 6 labels
+kmeans = KMeans(n_clusters=num_clusters, random_state=42, n_init=10)
+df['Cluster'] = kmeans.fit_predict(X)
+print(df['Cluster'])
+print(df['Cluster'][332],df['user_review'][332])
+df.to_json("reddit_negative_review_clusters.json",index=False)
+df.to_csv("reddit_negative_reviews_clusters.csv",index=False,quoting=csv.QUOTE_ALL,quotechar='"')
+# # Step 4: Extract Top Words for Each Cluster
+# def get_frequent_words(cluster):
+#     cluster_texts = df[df['Cluster'] == cluster]['Cleaned_Review'].tolist()
+#     words = " ".join(cluster_texts).split()
+#     common_words = Counter(words).most_common(5)
+#     return ", ".join([word for word, _ in common_words])
+
+# df['Cluster_Label'] = df['Cluster'].map(lambda x: get_frequent_words(x))
+
+# # Display results
+
+# # tools.display_dataframe_to_user(name="K-Means Clustering Results", dataframe=df)
+# print(df['Cluster_Label'])
