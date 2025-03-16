@@ -34,7 +34,7 @@ print(df['sentiment'])
 
 # ---------------cluster using -------------------------------------------------
 
-# df = pd.read_csv("./all_posts.csv")
+df = pd.read_csv("./reviews_clusters -cleaned.csv")
 def clean_text(text):
     text = str(text).lower()
     text = re.sub(r'\W+', ' ', text)  # Remove punctuation
@@ -49,6 +49,6 @@ X = vectorizer.fit_transform(df['Cleaned_Review'])
 # Step 3: Apply K-Means Clustering
 num_clusters = 6  # Since you need 6 labels
 kmeans = KMeans(n_clusters=num_clusters, random_state=42, n_init=10)
-df['Cluster'] = kmeans.fit_predict(X)
-df.to_json("review_clusters.json",index=False)
-df.to_csv("reviews_clusters.csv",index=False,quoting=csv.QUOTE_ALL,quotechar='"')
+df['Cluster_revised'] = kmeans.fit_predict(X)
+df.to_json("review_clusters_revised.json",index=False)
+df.to_csv("reviews_clusters_revised.csv",index=False,quoting=csv.QUOTE_ALL,quotechar='"')
