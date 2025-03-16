@@ -124,3 +124,20 @@ class SentimentAnalyzer():
                 print(f"Error fetching unclassified reviews: {e}")
         else:
             print("No unclassified reviews found!")
+
+    def assessSentiment(self, review):
+            """
+            Asses the sentiments . Threshold for sentiment score is an approximation
+            :param review: Extracted review         
+            :return: sentiment.
+            """
+            sentiment_score = self.sentiment_analyzer.polarity_scores(str(review))['compound']
+            if sentiment_score >= 0.1:
+                return "Positive"
+            elif sentiment_score <= -0.1:
+                return "Negative"
+                # print(self.neutral_sentiments)
+            elif sentiment_score >-0.1 and sentiment_score < 0.1:
+                return "Neutral"
+            else:
+                return "Unclassified"
