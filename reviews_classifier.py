@@ -13,7 +13,8 @@ from collections import Counter
 df = pd.read_csv("./all_posts.csv")
 
 # ---------------combine tile and review text into cpmbinedreview-------------------------------------------------
-df["combined_reviews"] = df['post_title'] + "." + df['self_text']
+df["combined_reviews"] = df['post_title'].astype(str).str.cat(df['self_text'].astype(str), na_rep='')
+
 print(df.columns)
 
 # ---------------analyze sentiments -------------------------------------------------
@@ -34,7 +35,7 @@ print(df['sentiment'])
 
 # ---------------cluster using -------------------------------------------------
 
-df = pd.read_csv("./reviews_clusters -cleaned.csv")
+# df = pd.read_csv("./reviews_clusters -cleaned.csv")
 def clean_text(text):
     text = str(text).lower()
     text = re.sub(r'\W+', ' ', text)  # Remove punctuation
