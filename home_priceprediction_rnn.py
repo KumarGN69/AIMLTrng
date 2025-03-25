@@ -54,7 +54,7 @@ model.add(Dense(1, activation='linear'))
 model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 #
 # #--------------train the ANN model-------------
-model.fit(input_scaled_train, output_scaled_train, epochs=100, batch_size=4, validation_data=(input_scaled_test, output_scaled_test))
+model.fit(input_scaled_train, output_scaled_train, epochs=1000, batch_size=10, validation_data=(input_scaled_test, output_scaled_test))
 #
 # print(output_test)
 loss, mse = model.evaluate(input_scaled_test, output_scaled_test)
