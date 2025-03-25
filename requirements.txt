@@ -7,3 +7,5 @@ scikit-learn~=1.6.1
 statsmodels~=0.14.4
 vadersentiment~=3.3.2
 tensorflow~=2.19.0
+sentence-transformers~=3.4.1
+tf-keras~=2.19.0
