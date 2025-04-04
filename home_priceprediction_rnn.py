@@ -54,7 +54,7 @@ model.add(Dense(1, activation='linear'))
 model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 #
 # #--------------train the ANN model-------------
-model.fit(input_scaled_train, output_scaled_train, epochs=1000, batch_size=10, validation_data=(input_scaled_test, output_scaled_test))
+model.fit(input_scaled_train, output_scaled_train, epochs=1000, batch_size=2, validation_data=(input_scaled_test, output_scaled_test))
 #
 # print(output_test)
 loss, mse = model.evaluate(input_scaled_test, output_scaled_test)
@@ -63,7 +63,7 @@ print(model.metrics_names[1])
 print(f"loss : {loss}, mse: {mse}")
 #
 # #------------predict using the model-----------
-samples = inputx.iloc[44:45, 0:2].to_numpy()
+samples = inputx.iloc[42:47, 0:2].to_numpy()
 print(samples)
 samples_scaled = scaler_X.transform(samples)
 #
