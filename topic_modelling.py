@@ -135,4 +135,3 @@ sns.heatmap(confusion_matrix(output_test_labels, predicted_labels), annot=True)
 # # Save as image file
 plt.savefig('confusion_matrix.png', bbox_inches='tight', dpi=300)
 plt.close()  # Close the plot to free memory
-
