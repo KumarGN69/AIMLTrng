@@ -10,3 +10,4 @@ tensorflow~=2.19.0
 sentence-transformers~=3.4.1
 tf-keras~=2.19.0
 bertopic~=0.17.0
+chromadb~=1.0.0
