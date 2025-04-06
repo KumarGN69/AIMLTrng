@@ -16,7 +16,7 @@ collection.add(
     ids=["doc1","doc2","doc3"],
 )
 results = collection.query(
-    query_texts = ["This is a query about food"],
+    query_texts = ["This is about food"],
     n_results =2
 )
 pprint.pprint(results)
