@@ -115,11 +115,12 @@ predicted_indices = np.argmax(predictions, axis=1)
 predicted_labels = label_binarizer.classes_[predicted_indices]
 print(classification_report(output_test_labels, predicted_labels))
 print(confusion_matrix(output_test_labels, predicted_labels))
-#--------------save the model to a json file-------------
-model_json = model.to_json()
-with open("selflearning_pretrained_Glove_text_embeddings_model.json", "w") as json_file:
-    json_file.write(model_json)
 
+#--------------save the model arch and weights to a json file-------------
+model_json = model.to_json()
+with open("selflearning_model_arch.json", "w") as json_file:
+    json_file.write(model_json)
+model.save_weights("selflearning_model.weights.h5")
 # -------------------Plot with Seaborn and save it to file -----------------
 matplotlib.use('Agg') # for saving it to an image file
 plt.figure(figsize=(8, 6), dpi=100)
