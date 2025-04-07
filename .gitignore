@@ -6,6 +6,7 @@ __pycache__/
 # C extensions
 *.so
 glove.6B.50d.txt
+*.png
 # Distribution / packaging
 .Python
 build/

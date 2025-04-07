@@ -1,5 +1,5 @@
 import pandas as pd
-
+import json
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler, LabelEncoder
@@ -65,3 +65,8 @@ pred_output= classifier.predict(input_scaled_test)
 print(confusion_matrix(output_test,pred_output))
 print(accuracy_score(output_test,pred_output))
 # print(classifier.predict([[35,5,5000,5,10]]))
+
+
+params = best_model.get_params()
+with open('attrition_classifier_model_params.json', 'w') as f:
+    json.dump(params, f)
