@@ -80,12 +80,12 @@ class CustomLLMModel:
             # length_function=len
             )
         # use the text splitter to create and split the documents
-        print('Starting creating documents list')
+        # print('Starting creating documents list')
         doc_list = text_splitter.create_documents(input_text)
-        print('Done creating documents list')
-        print('Starting splitting of documents ')
+        # print('Done creating documents list')
+        # print('Starting splitting of documents ')
         documents = text_splitter.split_documents(doc_list)
-        print('Done splitting documents list')
+        # print('Done splitting documents list')
 
         # create a persistent Chroma vector store for the list of documents'
         print('Starting vector store creation')

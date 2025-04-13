@@ -1,4 +1,5 @@
 from custom_llm import CustomLLMModel
+import time
 from langchain_chroma import Chroma
 class CustomRAG:
     """
@@ -39,6 +40,7 @@ class CustomRAG:
 
         # create a retriever from the vector store
         print('Creating a vector store retriever')
+
         retriever = vector_store.as_retriever(
             search_type="similarity",
             search_kwargs={"k": 25}
@@ -53,10 +55,12 @@ class CustomRAG:
 
         # generate a llm response using client along with the RAG results
         print('Invoking the LLM for RAG based response')
+        start = time.time()
         generated_content = client.generate(
             model=self.model.MODEL_NAME,
             prompt=f"Answer the user's query based on the provided context. Context: {doclist}"
         )
-        print('Done creating the RAG based response')
+        end = time.time()
+        print(f'Time taken to answer the query: {end-start} seconds')
         return generated_content.response
     

@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 from cleantext import clean
 from custom_llm import CustomLLMModel
 from custom_rag import CustomRAG
@@ -23,4 +24,7 @@ data_RAG = CustomRAG(model=model)
 
 print(data_RAG.do_similarity_search(vector_store=vector_store, query="Watch connection issues"))
 print('Summary of the issues')
+start = time.time()
 print(data_RAG.get_summary(vector_store))
+end = time.time()
+print(f'Time taken to summarize the content: {end-start} seconds')
