@@ -1,6 +1,11 @@
 image: gitpod/workspace-full
 
 tasks:  
+  - name: Ollama Install and start service
+    before: echo "Hi from Terminal 2"
+    init: curl -fsSL https://ollama.com/install.sh  | sh
+    command: ollama serve && ollama run mistral:latest
+
   - name: install and set up the environment  
     init: pip install -r requirements.txt 
       
