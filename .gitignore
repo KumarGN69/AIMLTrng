@@ -5,6 +5,7 @@ __pycache__/
 chroma.sqlite3
 # C extensions
 *.so
+.env
 glove.6B.50d.txt
 *.png
 # Distribution / packaging
