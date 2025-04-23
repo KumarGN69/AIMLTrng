@@ -83,7 +83,7 @@ summary_pivot.to_csv('./Reports/summary_pivot_bfte_geos_month_bySubPA.csv', inde
 summary_pivot = merged_df.pivot_table(index=['Major Proj Cat'],columns=['Month'], values=['Total BFTE'], aggfunc='sum')
 summary_pivot = summary_pivot.reset_index()
 summary_pivot.to_csv('./Reports/summary_pivot_proj_category.csv', index=False,quoting=csv.QUOTE_ALL,quotechar='"')
-# load the cloud projects data
+# # load the cloud projects data
 df = pd.read_csv('./Reports/cloud_project_list.csv')
 
 # create a sub dataframe for a specific month (latest)
@@ -99,6 +99,11 @@ summary_pivot.to_csv('./Reports/summary_pivot_bfte_projCategory_latest_month.csv
 summary_pivot = filtered_df.pivot_table(index=['Major Proj Cat'],columns=['Sub- PA'], values=['Total BFTE'], aggfunc='sum')
 summary_pivot = summary_pivot.reset_index()
 summary_pivot.to_csv('./Reports/summary_pivot_bfte_projCategory_latest_month_bySubPA.csv', index=False,quoting=csv.QUOTE_ALL,quotechar='"')
+
+summary_pivot = filtered_df.pivot_table(index=['Project_5'],columns=['Revised Component Group'], values=['Total BFTE'], aggfunc='sum')
+summary_pivot = summary_pivot.reset_index()
+summary_pivot.to_csv('./Reports/summary_pivot_bfte_projectname_latestmonth.csv', index=False,quoting=csv.QUOTE_ALL,quotechar='"')
+
 # # create files for trending by employee band
 # emp_types = ['E1','E2','E3','E4','E5','E6','E7','Third Party','Fixed Term Contract',"TSS Contract Trainee"]
 # for emp_type in emp_types:
