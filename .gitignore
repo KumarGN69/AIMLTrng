@@ -7,6 +7,10 @@ chroma.sqlite3
 *.so
 .env
 glove.6B.50d.txt
+cloud_MBR_Finance_Analysis.py
+ERS-TECHNOLOGY-FY25_TREND_REPORT.csv
+Reports/
+Inputs/
 *.png
 # Distribution / packaging
 .Python
