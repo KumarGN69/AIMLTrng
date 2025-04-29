@@ -20,7 +20,7 @@ inputx = salary_data_filtered.iloc[:,0:1]
 inputy = salary_data_filtered.iloc[:,1:2]
 
 # Supervised learning
-input_train, input_test, output_train, output_test = train_test_split(inputx, inputy, test_size = 1/5, random_state=42)
+input_train, input_test, output_train, output_test = train_test_split(inputx, inputy, train_size=4/5, random_state=42)
 model = LinearRegression()
 model.fit(input_train, output_train)
 pred_output= model.predict(input_test)
